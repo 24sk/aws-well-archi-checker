@@ -1,0 +1,18 @@
+# node_modules やビルド結果は常に無視
+node_modules/
+dist/
+output/
+
+# ログやキャッシュなども除外
+*.log
+*.tmp
+
+# VSCode の設定や一時ファイル
+.vscode/
+
+# dotenv 系（ESLint の lint 対象外）
+.env
+.env.* 
+
+# テスト用の一時出力ファイル（任意）
+coverage/

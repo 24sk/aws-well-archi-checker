@@ -1,0 +1,49 @@
+{
+  "name": "aws-well-archi-checker",
+  "version": "1.0.0",
+  "description": "A TypeScript-based CLI tool to check AWS infrastructure compliance with the AWS Well-Architected Framework.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "check": "ts-node src/cli.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@types/json2csv": "^5.0.7",
+    "@types/node": "^22.14.1",
+    "@types/yargs": "^17.0.33",
+    "@typescript-eslint/eslint-plugin": "^8.30.1",
+    "@typescript-eslint/parser": "^8.30.1",
+    "eslint": "^9.25.0",
+    "eslint-plugin-unicorn": "^58.0.0",
+    "prettier": "^3.5.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-auto-scaling": "^3.791.0",
+    "@aws-sdk/client-cloudfront": "^3.787.0",
+    "@aws-sdk/client-cloudtrail": "^3.787.0",
+    "@aws-sdk/client-cloudwatch": "^3.787.0",
+    "@aws-sdk/client-cloudwatch-logs": "^3.787.0",
+    "@aws-sdk/client-config-service": "^3.787.0",
+    "@aws-sdk/client-ec2": "^3.787.0",
+    "@aws-sdk/client-elastic-load-balancing-v2": "^3.787.0",
+    "@aws-sdk/client-guardduty": "^3.787.0",
+    "@aws-sdk/client-iam": "^3.787.0",
+    "@aws-sdk/client-kms": "^3.787.0",
+    "@aws-sdk/client-lambda": "^3.787.0",
+    "@aws-sdk/client-organizations": "^3.787.0",
+    "@aws-sdk/client-rds": "^3.787.0",
+    "@aws-sdk/client-route-53": "^3.787.0",
+    "@aws-sdk/client-s3": "^3.787.0",
+    "@aws-sdk/client-securityhub": "^3.787.0",
+    "chalk": "^5.4.1",
+    "dotenv": "^16.5.0",
+    "json2csv": "^6.0.0-alpha.2",
+    "yargs": "^17.7.2"
+  }
+}
