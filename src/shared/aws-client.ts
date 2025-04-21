@@ -14,6 +14,8 @@ import { AutoScalingClient } from '@aws-sdk/client-auto-scaling';
 import { Route53Client } from '@aws-sdk/client-route-53';
 import { CloudFrontClient } from '@aws-sdk/client-cloudfront';
 import { ElasticLoadBalancingV2Client } from '@aws-sdk/client-elastic-load-balancing-v2';
+import { CostExplorerClient } from '@aws-sdk/client-cost-explorer';
+import { BudgetsClient } from '@aws-sdk/client-budgets';
 
 import 'dotenv/config';
 
@@ -53,3 +55,5 @@ export const autoScalingClient = new AutoScalingClient(config);
 export const route53Client = new Route53Client(config);
 export const cloudFrontClient = new CloudFrontClient(config);
 export const elbv2Client = new ElasticLoadBalancingV2Client(config);
+export const costExplorerClient = new CostExplorerClient(config);
+export const budgetsClient = new BudgetsClient(config);

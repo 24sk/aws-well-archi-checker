@@ -13,12 +13,10 @@ export async function checkAlbMultiAz(): Promise<CheckResult[]> {
   const category = '可用性';
   const checkName = 'ALBが複数AZにまたがって構成されているか';
 
-  const results: CheckResult[] = [];
-
   const res = await elbv2Client.send(new DescribeLoadBalancersCommand({}));
   const albs = res.LoadBalancers ?? [];
 
-  for (const alb of albs) {
+  const results: CheckResult[] = albs.map((alb) => {
     const name = alb.LoadBalancerName ?? '(名前不明)';
     const id = alb.LoadBalancerArn ?? '(ARN不明)';
     const zones = alb.AvailabilityZones ?? [];
@@ -29,15 +27,15 @@ export async function checkAlbMultiAz(): Promise<CheckResult[]> {
       ? `構成AZ数: ${zones.length}（マルチAZ）`
       : '1つのAZにしか構成されていません';
 
-    results.push({
+    return {
       pillar,
       category,
       checkName,
       resource: `${name} (${id})`,
       status,
       detail,
-    });
-  }
+    };
+  });
 
   console.log(`✅ チェック結果: ${results.length} 件`);
   console.log(`✅ チェック結果: ${JSON.stringify(results, null, 2)}`);

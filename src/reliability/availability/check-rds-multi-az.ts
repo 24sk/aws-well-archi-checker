@@ -13,27 +13,24 @@ export async function checkRdsMultiAz(): Promise<CheckResult[]> {
   const category = '可用性';
   const checkName = 'RDSがマルチAZ構成になっているか';
 
-  const results: CheckResult[] = [];
-
   const res = await rdsClient.send(new DescribeDBInstancesCommand({}));
   const instances = res.DBInstances ?? [];
 
-  for (const db of instances) {
+  const results: CheckResult[] = instances.map((db) => {
     const id = db.DBInstanceIdentifier ?? '(ID不明)';
     const isMultiAz = db.MultiAZ === true;
-
     const status: CheckStatus = isMultiAz ? 'OK' : 'NG';
     const detail = isMultiAz ? 'マルチAZ構成になっています' : '単一AZ構成です';
 
-    results.push({
+    return {
       pillar,
       category,
       checkName,
       resource: id,
       status,
       detail,
-    });
-  }
+    };
+  });
 
   console.log(`✅ チェック結果: ${results.length} 件`);
   console.log(`✅ チェック結果: ${JSON.stringify(results, null, 2)}`);

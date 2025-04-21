@@ -13,12 +13,10 @@ export async function checkRdsBackup(): Promise<CheckResult[]> {
   const category = 'バックアップ';
   const checkName = 'RDSの自動バックアップが有効か';
 
-  const results: CheckResult[] = [];
-
   const res = await rdsClient.send(new DescribeDBInstancesCommand({}));
   const instances = res.DBInstances ?? [];
 
-  for (const db of instances) {
+  const results: CheckResult[] = instances.map((db) => {
     const id = db.DBInstanceIdentifier ?? '(ID不明)';
     const backupRetentionPeriod = db.BackupRetentionPeriod ?? 0;
     const isEnabled = backupRetentionPeriod > 0;
@@ -28,15 +26,15 @@ export async function checkRdsBackup(): Promise<CheckResult[]> {
       ? `自動バックアップ保持日数: ${backupRetentionPeriod}日`
       : '自動バックアップが無効です';
 
-    results.push({
+    return {
       pillar,
       category,
       checkName,
       resource: id,
       status,
       detail,
-    });
-  }
+    };
+  });
 
   console.log(`✅ チェック結果: ${results.length} 件`);
   console.log(`✅ チェック結果: ${JSON.stringify(results, null, 2)}`);

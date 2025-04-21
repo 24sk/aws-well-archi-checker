@@ -13,15 +13,13 @@ export async function checkEc2InstanceType(): Promise<CheckResult[]> {
   const category = 'インスタンスタイプ';
   const checkName = '適切なスペックで構成されているか';
 
-  const results: CheckResult[] = [];
   const res = await ec2Client.send(new DescribeInstancesCommand({}));
-
   const instances: Instance[] = (res.Reservations ?? []).flatMap((r) => r.Instances ?? []);
 
   // 非推奨や低パフォーマンスな旧世代インスタンスファミリー（例）
   const deprecatedTypes = [/^t2\./, /^m1\./, /^c1\./];
 
-  for (const instance of instances) {
+  const results: CheckResult[] = instances.map((instance) => {
     const id = instance.InstanceId ?? '(ID不明)';
     const type = instance.InstanceType ?? '(不明なタイプ)';
     const name = instance.Tags?.find((t) => t.Key === 'Name')?.Value ?? '(no name)';
@@ -32,15 +30,15 @@ export async function checkEc2InstanceType(): Promise<CheckResult[]> {
       ? `${type} は旧世代インスタンスタイプの可能性があります`
       : `${type} はパフォーマンス効率的に適切です`;
 
-    results.push({
+    return {
       pillar,
       category,
       checkName,
       resource: `${name} (${id})`,
       status,
       detail,
-    });
-  }
+    };
+  });
 
   console.log(`✅ チェック結果: ${results.length} 件`);
   console.log(`✅ チェック結果: ${JSON.stringify(results, null, 2)}`);

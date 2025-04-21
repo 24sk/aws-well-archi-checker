@@ -1,2 +1,3 @@
 export * from './instance-type';
-export * from './cash';
+export * from './cache';
+export * from './monitoring';

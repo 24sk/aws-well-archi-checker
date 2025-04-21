@@ -1,5 +1,5 @@
 import { ListDistributionsCommand } from '@aws-sdk/client-cloudfront';
-import { CheckResult } from '../../shared/types/check-result';
+import { CheckResult, type CheckStatus } from '../../shared/types/check-result';
 import { getPillarFromPath } from '../../utils';
 import { cloudFrontClient } from '../../shared/aws-client';
 
@@ -13,32 +13,29 @@ export async function checkCloudFrontUsage(): Promise<CheckResult[]> {
   const category = 'キャッシュ';
   const checkName = 'CloudFrontが活用されているか';
 
-  const results: CheckResult[] = [];
-
   const res = await cloudFrontClient.send(new ListDistributionsCommand({}));
   const items = res.DistributionList?.Items ?? [];
 
-  if (items.length === 0) {
-    results.push({
-      pillar,
-      category,
-      checkName,
-      resource: '(全体)',
-      status: 'NG',
-      detail: 'CloudFront ディストリビューションが構成されていません',
-    });
-  } else {
-    for (const dist of items) {
-      results.push({
-        pillar,
-        category,
-        checkName,
-        resource: dist.Id ?? '(ID不明)',
-        status: 'OK',
-        detail: `ドメイン: ${dist.DomainName}`,
-      });
-    }
-  }
+  const results: CheckResult[] =
+    items.length === 0
+      ? [
+          {
+            pillar,
+            category,
+            checkName,
+            resource: '(全体)',
+            status: 'NG',
+            detail: 'CloudFront ディストリビューションが構成されていません',
+          },
+        ]
+      : items.map(({ Id, DomainName }) => ({
+          pillar,
+          category,
+          checkName,
+          resource: Id ?? '(ID不明)',
+          status: 'OK' as CheckStatus,
+          detail: `ドメイン: ${DomainName}`,
+        }));
 
   console.log(`✅ チェック結果: ${results.length} 件`);
   console.log(`✅ チェック結果: ${JSON.stringify(results, null, 2)}`);
