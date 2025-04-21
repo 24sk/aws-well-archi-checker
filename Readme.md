@@ -19,7 +19,7 @@ cp .env.example .env
 
 ### 2. Node.js バージョン
 
-本プロジェクトは **Node.js 20** LTS 以上 を前提としています。
+本プロジェクトは **Node.js 20** LTS 以上 を対象としています。
 
 ### 3. 必要な VSCode 拡張機能
 
@@ -48,10 +48,10 @@ well-archi-checker/
 │ │ └── awsClient.ts
 │ ├── operational-excellence/ # 1. 運用上の優秀性
 │ │ └── checkCWAlarm.ts
-│ ├── security/ # 2. セキュリティ（予定）
-│ ├── reliability/ # 3. 信頼性（予定）
-│ ├── performance-efficiency/ # 4. パフォーマンス効率（予定）
-│ ├── cost-optimization/ # 5. コスト最適化（予定）
+│ ├── security/ # 2. セキュリティ
+│ ├── reliability/ # 3. 信頼性
+│ ├── performance-efficiency/ # 4. パフォーマンス効率
+│ ├── cost-optimization/ # 5. コスト最適化
 │ └── sustainability/ # 6. 持続可能性（予定）
 
 ---
