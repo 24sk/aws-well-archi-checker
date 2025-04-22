@@ -1,6 +1,5 @@
 import { IAMClient, ListUsersCommand, ListMFADevicesCommand } from '@aws-sdk/client-iam';
 import { CheckResult, CheckStatus } from '../../shared/types/check-result';
-import { Pillar, PILLAR_MAP } from '../../shared/consts/pillars';
 import { getPillarFromPath } from '../../utils';
 
 const iamClient = new IAMClient({});

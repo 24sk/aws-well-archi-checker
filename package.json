@@ -6,34 +6,37 @@
   "lint-staged": {
     "*.ts": [
       "eslint --fix",
-      "prettier --write",
-      "tsc --noEmit"
+      "prettier --write"
     ]
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "check": "ts-node src/cli.ts",
     "check:unused-functions": "ts-prune",
-    "check:unused-imports": "eslint 'src/**/*.{ts,tsx}' --rule 'no-unused-vars: error'"
+    "check:unused-imports": "eslint 'src/**/*.{ts,tsx}' --rule 'no-unused-vars: error'",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "Tsuyoshi Uchida",
   "license": "MIT",
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.25.1",
     "@types/json2csv": "^5.0.7",
     "@types/node": "^22.14.1",
     "@types/yargs": "^17.0.33",
     "@typescript-eslint/eslint-plugin": "^8.30.1",
     "@typescript-eslint/parser": "^8.30.1",
-    "eslint": "^9.25.0",
+    "eslint": "^9.25.1",
+    "eslint-define-config": "^2.1.0",
     "eslint-plugin-unicorn": "^58.0.0",
-    "husky": "^9.1.7",
+    "husky": "^8.0.0",
+    "jiti": "^2.4.2",
     "lint-staged": "^15.5.1",
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
     "ts-prune": "^0.10.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.31.0"
   },
   "dependencies": {
     "@aws-sdk/client-auto-scaling": "^3.791.0",

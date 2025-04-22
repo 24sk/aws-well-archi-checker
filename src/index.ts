@@ -10,11 +10,9 @@ import {
 import { checkIamUserAttachedPolicies } from './security/iam';
 import { checkS3Encryption } from './security/s3-bucket';
 import {
-  checkAwsConfig,
   checkGuardDutyEnabled,
   checkSecurityGroupOpenPorts,
   checkSecurityHubEnabled,
-  checkUnusedSecurityGroups,
 } from './security';
 import { checkKmsKeyRotation } from './security/kms';
 

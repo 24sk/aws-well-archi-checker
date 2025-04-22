@@ -1,12 +1,18 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo "🧼 Lint + Format + Type Check を実行中..."
+echo "🧼 Pre-commit チェック開始..."
 
+echo "🧼 Lint + Format + Type Check を実行中..."
 npx lint-staged || exit 1
 
-echo "🔍 未使用関数のチェック（ts-prune）"
+echo "🔍 未使用関数のチェック（ts-prune）を実行中..."
 npm run check:unused-functions || exit 1
 
-echo "📦 未使用 import のチェック"
+echo "📦 未使用 import のチェックを実行中..."
 npm run check:unused-imports || exit 1
+
+echo "🔠 型チェックを実行中（tsc --noEmit）..."
+npx tsc --noEmit -p tsconfig.json || exit 1
+
+echo "✅ Pre-commit チェック完了"
