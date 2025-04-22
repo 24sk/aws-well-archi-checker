@@ -1,0 +1,12 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🧼 Lint + Format + Type Check を実行中..."
+
+npx lint-staged || exit 1
+
+echo "🔍 未使用関数のチェック（ts-prune）"
+npm run check:unused-functions || exit 1
+
+echo "📦 未使用 import のチェック"
+npm run check:unused-imports || exit 1

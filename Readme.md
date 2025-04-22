@@ -33,6 +33,37 @@ cp .env.example .env
 
 VSCode保存時整形：`settings.json` に `"editor.formatOnSave": true` を推奨
 
+---
+
+## 🚀 実行方法
+
+CLIツールは `cli.ts` をエントリポイントとしています。
+
+```bash
+npx tsx cli.ts
+```
+
+### 任意のフィルタ指定
+
+- ピラー単位で指定：
+  ```bash
+  npm run check -- --pillar security
+  ```
+- カテゴリ単位で指定：
+  ```bash
+  npm run check -- --category audit
+  ```
+- 関数名で指定：
+  ```bash
+  npm run check -- --check checkIamUserMfa
+  ```
+
+### 📦 チェック結果
+
+すべてのチェック結果は CSV形式で `output/well-archi-report.csv` に出力されます。
+
+---
+
 ## ディレクトリ構成
 
 well-archi-checker/

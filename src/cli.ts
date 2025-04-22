@@ -234,17 +234,22 @@ const ALL_CHECKS: CheckDefinition[] = [
 
 async function main() {
   const argv = await yargs(hideBin(process.argv))
-    .option('pillar', {
-      type: 'string',
-      description: '実行する柱（例: security, operational-excellence）',
-    })
-    .option('category', {
-      type: 'string',
-      description: '実行するカテゴリ（例: iam, s3-bucket, audit）',
-    })
-    .option('check', {
-      type: 'string',
-      description: '実行する関数名（例: checkIamUserMfa）',
+    .options({
+      pillar: {
+        type: 'string',
+        description: '実行する柱（例: security, operational-excellence）',
+        choices: Array.from(new Set(ALL_CHECKS.map((c) => c.pillar))),
+      },
+      category: {
+        type: 'string',
+        description: '実行するカテゴリ（例: iam, s3-bucket, audit）',
+        choices: Array.from(new Set(ALL_CHECKS.map((c) => c.category))),
+      },
+      check: {
+        type: 'string',
+        description: '実行する関数名（例: checkIamUserMfa）',
+        choices: ALL_CHECKS.map((c) => c.fnName),
+      },
     })
     .help().argv;
 
