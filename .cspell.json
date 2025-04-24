@@ -1,5 +1,5 @@
 {
   "version": "0.2",
-  "words": ["archi", "healthcheck", "Datapoints", "elbv2", "UnblendedCost"],
+  "words": ["archi", "healthcheck", "Datapoints", "elbv2", "UnblendedCost", "dotenv"],
   "ignorePaths": ["node_modules", "dist"]
 }

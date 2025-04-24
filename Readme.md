@@ -43,17 +43,32 @@ CLIツールは `cli.ts` をエントリポイントとしています。
 npx tsx cli.ts
 ```
 
+### 環境毎の実行方法
+
+```bash
+# 検証環境でチェックを実行
+npm run check:staging
+
+# 本番環境でチェックを実行
+npm run check:production
+```
+
 ### 任意のフィルタ指定
 
 - ピラー単位で指定：
-  ```bash
-  npm run check -- --pillar security
-  ```
+
+```bash
+npm run check -- --pillar security
+```
+
 - カテゴリ単位で指定：
+
   ```bash
   npm run check -- --category audit
   ```
+
 - 関数名で指定：
+
   ```bash
   npm run check -- --check checkIamUserMfa
   ```

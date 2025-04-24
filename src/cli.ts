@@ -276,7 +276,6 @@ async function main() {
   }
 
   exportToCsv(results, 'output/well-archi-report.csv');
-  console.log('\n📦 CSV出力完了: output/well-archi-report.csv');
   console.log('🎉 全チェック完了');
 }
 

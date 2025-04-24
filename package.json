@@ -11,6 +11,8 @@
   },
   "scripts": {
     "check": "ts-node src/cli.ts",
+    "check:staging": "NODE_ENV=staging ts-node src/cli.ts",
+    "check:production": "NODE_ENV=production ts-node src/cli.ts",
     "check:unused-functions": "ts-prune",
     "check:unused-imports": "eslint 'src/**/*.{ts,tsx}' --rule 'no-unused-vars: error'",
     "prepare": "husky install"
@@ -60,6 +62,7 @@
     "@aws-sdk/client-securityhub": "^3.787.0",
     "chalk": "^5.4.1",
     "dotenv": "^16.5.0",
+    "dotenv-flow": "^4.1.0",
     "json2csv": "^6.0.0-alpha.2",
     "yargs": "^17.7.2"
   }

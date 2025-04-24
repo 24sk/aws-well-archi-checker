@@ -1,3 +1,5 @@
+import 'dotenv-flow/config';
+
 import { CloudWatchClient, CloudWatchClientConfig } from '@aws-sdk/client-cloudwatch';
 import { EC2Client } from '@aws-sdk/client-ec2';
 import { RDSClient } from '@aws-sdk/client-rds';
@@ -17,8 +19,6 @@ import { ElasticLoadBalancingV2Client } from '@aws-sdk/client-elastic-load-balan
 import { CostExplorerClient } from '@aws-sdk/client-cost-explorer';
 import { BudgetsClient } from '@aws-sdk/client-budgets';
 
-import 'dotenv/config';
-
 const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
 const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
 const region = process.env.AWS_REGION || 'ap-northeast-1';
@@ -26,9 +26,9 @@ const region = process.env.AWS_REGION || 'ap-northeast-1';
 if (!accessKeyId || !secretAccessKey) {
   console.error(
     '\x1b[31m%s\x1b[0m',
-    '[ERROR] AWS_ACCESS_KEY_ID または AWS_SECRET_ACCESS_KEY が未設定です。`.env` ファイルを確認してください。'
+    '[ERROR] AWS_ACCESS_KEY_ID または AWS_SECRET_ACCESS_KEY が未設定です。`.env` または `.env.*` ファイルを確認してください。'
   );
-  process.exit(1); // エラー終了
+  process.exit(1);
 }
 
 const config = {
